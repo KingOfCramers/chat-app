@@ -20,10 +20,11 @@ io.on('connection', (socket) => { // This is simply to initiate the connection..
   socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat app.'));
   socket.broadcast.emit('newMessage', generateMessage('Admin', 'A new user has joined the chat.'));
 
-  socket.on('createMessage', (msg) => {    
+  socket.on('createMessage', (msg, callback) => {    
     console.log('createMessage', msg);
     let { from, text } = msg;
     io.emit('newMessage', generateMessage(from, text)); // This emits an event to every connection.
+    callback('This is an acknowledgement from the server.');
   });
 
   socket.on('disconnect', () => {
