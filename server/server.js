@@ -12,17 +12,24 @@ var io = socketIO(server); // Gives you access to a route that accepts incoming 
 
 app.use(express.static(publicPath));
 
-io.on('connection', (socket) => {
-  console.log('New user connected.');
+io.on('connection', (socket) => { // This is simply to initiate the connection...
+  console.log('New user connected.'); // The socket then handles all the other events...
+
+  socket.on('createMessage', (msg) => {    
+    console.log('createMessage', msg);
+    let { from, text } = msg;
+
+    io.emit('newMessage', {
+      from,
+      text,
+      createdAt: new Date().getTime()
+    }); // This emits an event to every connection.
+  });
 
   socket.on('disconnect', () => {
     console.log('Client disconnected');
-  })
+  });
 
-//  console.log(socket)
-//   socket.on('disconnect', () => {
-//     console.log('User was disconnected');
-//   });
  });
 
 server.listen(port, () => {
