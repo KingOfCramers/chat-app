@@ -3,12 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Page Title</title>
+  <title>Message App</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="/socket.io/socket.io.js"></script> <!-- Location of websocket script... --> 
-  <script src="/js/index.js"></script>
 </head>
 <body>
-  Hello World!
+  <p>Chat app</p>
+  <ol id="messages"></ol>
+  <form id="message-form">
+    <input type="text" name="message" placeholder="Type message here..."/>
+    <button>Send</button>
+  </form>
+  <script src="/socket.io/socket.io.js"></script> <!-- Location of websocket script... --> 
+  <script src ="/js/libs/jquery-3.3.1.min.js"></script>
+  <script src="/js/index.js"></script>
 </body>
 </html>
